@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -20,7 +21,7 @@ public class ProdutosDALImpl implements ProdutosDAL {
     }
 
     @Override
-    public Produtos obterProdutoPorId(String codigo) {
+    public Produtos obterProdutoPorCodigo(Integer codigo) {
         Query query = new Query();
         query.addCriteria(Criteria.where("codigo").is(codigo));
 

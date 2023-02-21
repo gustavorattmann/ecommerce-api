@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProdutosDAL {
     List<Produtos> listarTodosProdutos();
 
-    Produtos obterProdutoPorId(String codigo);
+    Produtos obterProdutoPorCodigo(Integer codigo);
 
     Produtos adicionarProduto(Produtos produto);
 }
