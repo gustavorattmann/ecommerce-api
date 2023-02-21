@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Produto {
+public class Produtos {
     @Id
     private String codigo;
     private String nome;
