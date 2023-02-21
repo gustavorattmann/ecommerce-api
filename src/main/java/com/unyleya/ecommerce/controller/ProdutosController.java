@@ -17,7 +17,7 @@ public class ProdutosController {
         this.produtosRepository = produtosRepository;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/produtos", method = RequestMethod.GET)
     public List<Produtos> listarTodosProdutos() {
         System.out.println("Obtendo todos os produtos.");
 
