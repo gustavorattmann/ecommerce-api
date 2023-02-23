@@ -2,12 +2,21 @@ package com.unyleya.ecommerce.controller;
 
 import com.unyleya.ecommerce.dal.ProdutosRepository;
 import com.unyleya.ecommerce.model.Produtos;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping(value = "/api/")
 public class ProdutosController {
     private final ProdutosRepository produtosRepository;
@@ -43,11 +52,26 @@ public class ProdutosController {
     }
 
     @RequestMapping(value = "/produto/cadastrar", method = RequestMethod.POST)
-    public Produtos adicionarProduto(@RequestBody Produtos produtos) {
+    public ResponseEntity<String> adicionarProduto(@Valid @RequestBody Produtos produtos) {
         System.out.println("Cadastro de produto.");
 
-        return produtos;
+        Produtos criarProduto = produtosRepository.save(produtos);
+
+        return ResponseEntity.ok("Produto cadastrado com sucesso!");
 
         // return produtosRepository.save(produtos);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 }

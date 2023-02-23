@@ -1,14 +1,25 @@
 package com.unyleya.ecommerce.model;
 
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Produtos {
+    private Object object;
+
     @Id
     private String codigo;
+
+    @NotBlank(message = "O nome do produto é obrigatório!")
+    @Size(max = 100, message = "Quantidade de dígitos maior do que permitido!")
+    @Indexed(unique = true)
     private String nome;
-    private Float preco;
+
+    @NotNull(message = "O preço do produto é obrigatório!")
+    @Digits(integer = 100, fraction = 2, message = "Preço inválido!")
+    private Double preco;
 
     public String getCodigo() {
         return codigo;
@@ -26,11 +37,11 @@ public class Produtos {
         this.nome = nome;
     }
 
-    public Float getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Float preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 }

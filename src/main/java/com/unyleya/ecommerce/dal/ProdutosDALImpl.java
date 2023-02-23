@@ -7,8 +7,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class ProdutosDALImpl implements ProdutosDAL {
     @Autowired
@@ -29,8 +27,6 @@ public class ProdutosDALImpl implements ProdutosDAL {
 
     @Override
     public Produtos adicionarProduto(Produtos produto) {
-        mongoTemplate.save(produto);
-
-        return produto;
+        return mongoTemplate.save(produto);
     }
 }
