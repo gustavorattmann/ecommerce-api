@@ -6,24 +6,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Produtos {
     @Id
-    private String id;
-    private Integer codigo;
+    private String codigo;
     private String nome;
     private Float preco;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

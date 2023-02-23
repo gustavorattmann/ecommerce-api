@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -16,12 +15,12 @@ public class ProdutosDALImpl implements ProdutosDAL {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<Produtos> listarTodosProdutos() {
+    public Object listarTodosProdutos() {
         return mongoTemplate.findAll(Produtos.class);
     }
 
     @Override
-    public Produtos obterProdutoPorCodigo(Integer codigo) {
+    public Object obterProdutoPorCodigo(String codigo) {
         Query query = new Query();
         query.addCriteria(Criteria.where("codigo").is(codigo));
 

@@ -5,9 +5,9 @@ import com.unyleya.ecommerce.model.Produtos;
 import java.util.List;
 
 public interface ProdutosDAL {
-    List<Produtos> listarTodosProdutos();
+    Object listarTodosProdutos();
 
-    Produtos obterProdutoPorCodigo(Integer codigo);
+    Object obterProdutoPorCodigo(String codigo);
 
     Produtos adicionarProduto(Produtos produto);
 }
