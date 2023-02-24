@@ -7,5 +7,7 @@ public interface ProdutosDAL {
 
     Object obterProdutoPorCodigo(String codigo);
 
-    Produtos adicionarProduto(Produtos produto);
+    Produtos adicionarProduto(Produtos produtos);
+
+    Produtos alterarProduto(String codigo, Produtos produtos);
 }

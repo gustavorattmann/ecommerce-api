@@ -58,8 +58,23 @@ public class ProdutosController {
         Produtos criarProduto = produtosRepository.save(produtos);
 
         return ResponseEntity.ok("Produto cadastrado com sucesso!");
+    }
 
-        // return produtosRepository.save(produtos);
+    @RequestMapping(value = "/produto/alterar/{codigo}", method = RequestMethod.PATCH)
+    public Object alterarProduto(@PathVariable(value = "codigo") String codigo, @RequestBody Produtos produtos) {
+        System.out.println("Alteração de produto.");
+
+        System.out.println(produtos);
+
+        Optional<Produtos> buscarProduto = produtosRepository.findById(codigo);
+
+        if (buscarProduto.isEmpty()) {
+            return "Produto não encontrado!";
+        }
+
+        Produtos alterarProduto = produtosRepository.save(produtos);
+
+        return ResponseEntity.ok("Produto alterado com sucesso!");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
