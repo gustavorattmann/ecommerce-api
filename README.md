@@ -11,27 +11,27 @@ mvn spring-boot:run
 ## Rotas
 Para obter todos os produtos:
 ```
-/produtos
+/api/produtos
 ```
 
 Para obter um produto específico:
 ```
-/produto/1
+/api/produto/63f6f2a4093d752d2dae4f2f
 ```
 
 Para cadastrar um novo produto:
 ```
-/produto/cadastrar
+/api/produto/cadastrar
 ```
 
 Para alterar um produto específico:
 ```
-/produto/alterar/2
+/api/produto/alterar/63f6f2a4093d752d2dae4f2f
 ```
 
 Para deletar um produto específico:
 ```
-/produto/deletar/2
+/api/produto/deletar/63f6f2a4093d752d2dae4f2f
 ```
 
 ***Observação**: os códigos em todas as rotas são para exemplo.*

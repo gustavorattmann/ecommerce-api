@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -32,14 +31,14 @@ public class ProdutosDALImpl implements ProdutosDAL {
     }
 
     @Override
-    public Produtos alterarProduto(String codigo, Produtos produtos) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(codigo));
+    public Object alterarProduto(Produtos produtos) {
+        return mongoTemplate.save(produtos);
+    }
 
-        Update update = new Update();
-        update.set("nome", produtos.getNome());
-        update.set("preco", produtos.getPreco());
+    @Override
+    public Object deletarProduto(String codigo) {
+        Query query = new Query(Criteria.where("id").is(codigo));
 
-        return mongoTemplate.findAndModify(query, update, Produtos.class);
+        return mongoTemplate.remove(query, Produtos.class);
     }
 }

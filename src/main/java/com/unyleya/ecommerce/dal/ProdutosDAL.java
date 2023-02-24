@@ -9,5 +9,7 @@ public interface ProdutosDAL {
 
     Produtos adicionarProduto(Produtos produtos);
 
-    Produtos alterarProduto(String codigo, Produtos produtos);
+    Object alterarProduto(Produtos produtos);
+
+    Object deletarProduto(String codigo);
 }

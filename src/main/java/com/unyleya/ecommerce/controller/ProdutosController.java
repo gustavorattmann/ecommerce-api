@@ -64,17 +64,32 @@ public class ProdutosController {
     public Object alterarProduto(@PathVariable(value = "codigo") String codigo, @RequestBody Produtos produtos) {
         System.out.println("Alteração de produto.");
 
-        System.out.println(produtos);
+        Optional<Produtos> buscarProduto = produtosRepository.findById(codigo);
+
+        if (buscarProduto.isPresent()) {
+            produtos.setCodigo(codigo);
+
+            Produtos produtoAlterado = produtosRepository.save(produtos);
+
+            return ResponseEntity.ok("Produto alterado com sucesso!");
+        }
+
+        return "Produto não encontrado!";
+    }
+
+    @RequestMapping(value = "/produto/deletar/{codigo}", method = RequestMethod.DELETE)
+    public Object deletarProduto(@PathVariable(value = "codigo") String codigo) {
+        System.out.println("Deletar produto");
 
         Optional<Produtos> buscarProduto = produtosRepository.findById(codigo);
 
-        if (buscarProduto.isEmpty()) {
-            return "Produto não encontrado!";
+        if (buscarProduto.isPresent()) {
+            produtosRepository.deleteById(codigo);
+
+            return ResponseEntity.ok("Produto deletado com sucesso!");
         }
 
-        Produtos alterarProduto = produtosRepository.save(produtos);
-
-        return ResponseEntity.ok("Produto alterado com sucesso!");
+        return "Produto não encontrado!";
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
